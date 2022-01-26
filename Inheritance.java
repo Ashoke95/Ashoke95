@@ -1,0 +1,18 @@
+package Ashoke;
+
+public class Inheritance {
+	 float salary=40000;
+	 String s="Ram";
+		
+		static	class Programmer extends Inheritance{  
+			 int bonus=10000;int age=22;  
+			}
+			 public static void main(String args[]){  
+			   Programmer p=new Programmer(); 
+			   System.out.println("name is:"+p.s);
+			   System.out.println("Programmer salary is:"+p.salary);  
+			   System.out.println("Bonus of Programmer is:"+p.bonus);
+			   System.out.print("age "+p.age);
+
+	}
+}
