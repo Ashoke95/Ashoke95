@@ -12,6 +12,6 @@ public class UpdateArrayList {
 		System.out.println("Element in the list "+list);
 
 		list.set(1,"Bipin Rao");
-		System.out.print("elemin in the list after update : " +list);
+		System.out.print("element in the list after update : " +list);
 }
 }
