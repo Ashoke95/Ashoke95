@@ -8,7 +8,7 @@ public class LinkListAssignment {
 	
 		LinkedList<String> al=new LinkedList<String>();  
 		al.add("Ram");  
-		al.add("Shyam"); //al is a object by which we call add method  
+		al.add("Shyam"); //al is a object by which we call a method  
 		al.add("jadu");  
 		al.add("Madhu");
 		al.add("Ashoke");
