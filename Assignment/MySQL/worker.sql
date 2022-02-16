@@ -1,0 +1,15 @@
+use regis;
+desc worker;
+SELECT * FROM regis.worker;
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('20', 'Rahul', 'Mandal', '54090', '2014-01-20 09:00:00', 'Admin');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('9', 'Ashoke', 'Malakar', '8540', '2014-01-20 09:00:00', 'CS');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('10', 'Raj', 'Das', '4900', '2014-01-20 09:00:00', 'Admin');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('11', 'Rahul', 'Raj', '33400', '2014-01-20 09:00:00', 'HR');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('12', 'Sham', 'Mandal', '51400', '2014-01-20 09:00:00', 'English');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('13', 'Bipin', 'Shau', '56400', '2014-01-20 09:00:00', 'Admin');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('14', 'Kiran', 'Sen', '54050', '2014-01-20 09:00:00', 'Clerk');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('15', 'Rahul', 'Mandal', '15400', '2014-01-20 09:00:00', 'CS');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('16', 'Shamal', 'Samanta', '25400', '2014-01-20 09:00:00', 'Employe');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('17', 'Kartik', 'kk', '54050', '2014-01-20 09:00:00', 'Admin');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('18', 'Sambu', 'Pal', '54200', '2014-01-20 09:00:00', 'HR');
+INSERT INTO `regis`.`worker` (`Workerid`, `First_name`, `Last_name`, `Salary`, `Joining_date`, `Department`) VALUES ('19', 'Rahul', 'Koley', '54060', '2014-01-20 09:00:00', 'Admin');
