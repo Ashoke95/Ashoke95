@@ -1,0 +1,14 @@
+use regis;
+desc title;
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('1', 'Manager', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('2', 'Executive', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('3', 'Executive', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('4', 'Asst. Manager', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('5', 'Lead', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('6', 'Executive', '2022-02-16 06:12:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('7', 'Manager', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('8', 'Executive', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('9', 'Employee', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('10', 'Executive', '2022-02-16 06:02:40');
+INSERT INTO `regis`.`title` (`WORKER_REF_ID `, `WORKER_TITLE `, `AFFECTED_FROM`) VALUES ('11', 'Lead', '2022-02-16 06:02:40');
+SELECT * FROM regis.title;
