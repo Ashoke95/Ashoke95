@@ -1,0 +1,898 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use regis;
+Database changed
+mysql> select*from officers;
++----+-------+---------+
+| id | name  | address |
++----+-------+---------+
+|  1 | Ram   | Haur    |
+|  2 | Shyam | Kolkata |
+|  3 | jadu  | pune    |
+|  4 | Ramu  | pune    |
+|  5 | Dipu  | kolkata |
+|  6 | anu   | Goa     |
++----+-------+---------+
+6 rows in set (0.07 sec)
+
+mysql> select*from studentss;
+ERROR 1146 (42S02): Table 'regis.studentss' doesn't exist
+mysql> select*from students;
++------+--------+-------------------+
+| s_id | s_name | s_course          |
++------+--------+-------------------+
+|    1 | dipu   | cs                |
+|    2 | bbb    | java              |
+|    3 | bbb    | java              |
+|    4 | ccc    | .net              |
+|    5 | ddd    | .c++              |
+|    6 | mina   | digital marketing |
+|    7 | ccc    | .net              |
++------+--------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name from officers  INNE
+R JOIN students ON officers.id=students.s_id;
++-------+---------+--------+
+| name  | address | s_name |
++-------+---------+--------+
+| Ram   | Haur    | dipu   |
+| Shyam | Kolkata | bbb    |
+| jadu  | pune    | bbb    |
+| Ramu  | pune    | ccc    |
+| Dipu  | kolkata | ddd    |
+| anu   | Goa     | mina   |
++-------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name from officers LEFT
+JOIN students ON officers.id=students.s_id;
++-------+---------+--------+
+| name  | address | s_name |
++-------+---------+--------+
+| Ram   | Haur    | dipu   |
+| Shyam | Kolkata | bbb    |
+| jadu  | pune    | bbb    |
+| Ramu  | pune    | ccc    |
+| Dipu  | kolkata | ddd    |
+| anu   | Goa     | mina   |
++-------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name,students.s_course f
+rom officers RIGHT JOIN students ON officers.id=students.s_id;
++-------+---------+--------+-------------------+
+| name  | address | s_name | s_course          |
++-------+---------+--------+-------------------+
+| Ram   | Haur    | dipu   | cs                |
+| Shyam | Kolkata | bbb    | java              |
+| jadu  | pune    | bbb    | java              |
+| Ramu  | pune    | ccc    | .net              |
+| Dipu  | kolkata | ddd    | .c++              |
+| anu   | Goa     | mina   | digital marketing |
+| NULL  | NULL    | ccc    | .net              |
++-------+---------+--------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> select officers.id, officers.name,officers.address,students.s_id,students
+.s_name,students.s_course from officers CROSS JOIN students;
++----+-------+---------+------+--------+-------------------+
+| id | name  | address | s_id | s_name | s_course          |
++----+-------+---------+------+--------+-------------------+
+|  1 | Ram   | Haur    |    1 | dipu   | cs                |
+|  2 | Shyam | Kolkata |    1 | dipu   | cs                |
+|  3 | jadu  | pune    |    1 | dipu   | cs                |
+|  4 | Ramu  | pune    |    1 | dipu   | cs                |
+|  5 | Dipu  | kolkata |    1 | dipu   | cs                |
+|  6 | anu   | Goa     |    1 | dipu   | cs                |
+|  1 | Ram   | Haur    |    2 | bbb    | java              |
+|  2 | Shyam | Kolkata |    2 | bbb    | java              |
+|  3 | jadu  | pune    |    2 | bbb    | java              |
+|  4 | Ramu  | pune    |    2 | bbb    | java              |
+|  5 | Dipu  | kolkata |    2 | bbb    | java              |
+|  6 | anu   | Goa     |    2 | bbb    | java              |
+|  1 | Ram   | Haur    |    3 | bbb    | java              |
+|  2 | Shyam | Kolkata |    3 | bbb    | java              |
+|  3 | jadu  | pune    |    3 | bbb    | java              |
+|  4 | Ramu  | pune    |    3 | bbb    | java              |
+|  5 | Dipu  | kolkata |    3 | bbb    | java              |
+|  6 | anu   | Goa     |    3 | bbb    | java              |
+|  1 | Ram   | Haur    |    4 | ccc    | .net              |
+|  2 | Shyam | Kolkata |    4 | ccc    | .net              |
+|  3 | jadu  | pune    |    4 | ccc    | .net              |
+|  4 | Ramu  | pune    |    4 | ccc    | .net              |
+|  5 | Dipu  | kolkata |    4 | ccc    | .net              |
+|  6 | anu   | Goa     |    4 | ccc    | .net              |
+|  1 | Ram   | Haur    |    5 | ddd    | .c++              |
+|  2 | Shyam | Kolkata |    5 | ddd    | .c++              |
+|  3 | jadu  | pune    |    5 | ddd    | .c++              |
+|  4 | Ramu  | pune    |    5 | ddd    | .c++              |
+|  5 | Dipu  | kolkata |    5 | ddd    | .c++              |
+|  6 | anu   | Goa     |    5 | ddd    | .c++              |
+|  1 | Ram   | Haur    |    6 | mina   | digital marketing |
+|  2 | Shyam | Kolkata |    6 | mina   | digital marketing |
+|  3 | jadu  | pune    |    6 | mina   | digital marketing |
+|  4 | Ramu  | pune    |    6 | mina   | digital marketing |
+|  5 | Dipu  | kolkata |    6 | mina   | digital marketing |
+|  6 | anu   | Goa     |    6 | mina   | digital marketing |
+|  1 | Ram   | Haur    |    7 | ccc    | .net              |
+|  2 | Shyam | Kolkata |    7 | ccc    | .net              |
+|  3 | jadu  | pune    |    7 | ccc    | .net              |
+|  4 | Ramu  | pune    |    7 | ccc    | .net              |
+|  5 | Dipu  | kolkata |    7 | ccc    | .net              |
+|  6 | anu   | Goa     |    7 | ccc    | .net              |
++----+-------+---------+------+--------+-------------------+
+42 rows in set (0.05 sec)
+
+mysql> select address count(*) from officers group by address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'count
+(*) from officers group by address' at line 1
+mysql> select address, count(*) from officers group by address;
++---------+----------+
+| address | count(*) |
++---------+----------+
+| Haur    |        1 |
+| Kolkata |        2 |
+| pune    |        2 |
+| Goa     |        1 |
++---------+----------+
+4 rows in set (0.09 sec)
+
+mysql> alter table officers add column working_hours int(10);
+Query OK, 0 rows affected, 1 warning (1.62 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc officers;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id            | int         | NO   | PRI | NULL    |       |
+| name          | varchar(20) | NO   |     | NULL    |       |
+| address       | varchar(20) | NO   |     | NULL    |       |
+| working_hours | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+mysql> update officers set working_hours=2;
+Query OK, 6 rows affected (0.11 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             2 |
+|  3 | jadu  | pune    |             2 |
+|  4 | Ramu  | pune    |             2 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             2 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> update officers set working_hours=4 where id=2;
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set working_hours=9 where id=3;
+Query OK, 1 row affected (0.16 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set working_hours=6 where id=4;
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             4 |
+|  3 | jadu  | pune    |             9 |
+|  4 | Ramu  | pune    |             6 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             2 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> update officers set working_hours=6 where id=6;
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             4 |
+|  3 | jadu  | pune    |             9 |
+|  4 | Ramu  | pune    |             6 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             6 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.06 sec)
+
+mysql> select name,min(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.07 sec)
+
+mysql> select name,max(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into officers values(6,anu,Goa);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select name,avg(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |              2.0000 |
+| Shyam |              4.0000 |
+| jadu  |              9.0000 |
+| Ramu  |              6.0000 |
+| Dipu  |              2.0000 |
+| anu   |              6.0000 |
++-------+---------------------+
+6 rows in set (0.09 sec)
+
+mysql> insert into officers values(7,anu,Goa);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name having sum)working_hours>8;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near ')work
+ing_hours>8' at line 1
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name having sum(working_hours)>8;
++------+---------------------+
+| name | total_working_hours |
++------+---------------------+
+| jadu |                   9 |
++------+---------------------+
+1 row in set (0.00 sec)
+
+mysql>Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use regis;
+Database changed
+mysql> select*from officers;
++----+-------+---------+
+| id | name  | address |
++----+-------+---------+
+|  1 | Ram   | Haur    |
+|  2 | Shyam | Kolkata |
+|  3 | jadu  | pune    |
+|  4 | Ramu  | pune    |
+|  5 | Dipu  | kolkata |
+|  6 | anu   | Goa     |
++----+-------+---------+
+6 rows in set (0.07 sec)
+
+mysql> select*from studentss;
+ERROR 1146 (42S02): Table 'regis.studentss' doesn't exist
+mysql> select*from students;
++------+--------+-------------------+
+| s_id | s_name | s_course          |
++------+--------+-------------------+
+|    1 | dipu   | cs                |
+|    2 | bbb    | java              |
+|    3 | bbb    | java              |
+|    4 | ccc    | .net              |
+|    5 | ddd    | .c++              |
+|    6 | mina   | digital marketing |
+|    7 | ccc    | .net              |
++------+--------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name from officers  INNE
+R JOIN students ON officers.id=students.s_id;
++-------+---------+--------+
+| name  | address | s_name |
++-------+---------+--------+
+| Ram   | Haur    | dipu   |
+| Shyam | Kolkata | bbb    |
+| jadu  | pune    | bbb    |
+| Ramu  | pune    | ccc    |
+| Dipu  | kolkata | ddd    |
+| anu   | Goa     | mina   |
++-------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name from officers LEFT
+JOIN students ON officers.id=students.s_id;
++-------+---------+--------+
+| name  | address | s_name |
++-------+---------+--------+
+| Ram   | Haur    | dipu   |
+| Shyam | Kolkata | bbb    |
+| jadu  | pune    | bbb    |
+| Ramu  | pune    | ccc    |
+| Dipu  | kolkata | ddd    |
+| anu   | Goa     | mina   |
++-------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name,students.s_course f
+rom officers RIGHT JOIN students ON officers.id=students.s_id;
++-------+---------+--------+-------------------+
+| name  | address | s_name | s_course          |
++-------+---------+--------+-------------------+
+| Ram   | Haur    | dipu   | cs                |
+| Shyam | Kolkata | bbb    | java              |
+| jadu  | pune    | bbb    | java              |
+| Ramu  | pune    | ccc    | .net              |
+| Dipu  | kolkata | ddd    | .c++              |
+| anu   | Goa     | mina   | digital marketing |
+| NULL  | NULL    | ccc    | .net              |
++-------+---------+--------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> select officers.id, officers.name,officers.address,students.s_id,students
+.s_name,students.s_course from officers CROSS JOIN students;
++----+-------+---------+------+--------+-------------------+
+| id | name  | address | s_id | s_name | s_course          |
++----+-------+---------+------+--------+-------------------+
+|  1 | Ram   | Haur    |    1 | dipu   | cs                |
+|  2 | Shyam | Kolkata |    1 | dipu   | cs                |
+|  3 | jadu  | pune    |    1 | dipu   | cs                |
+|  4 | Ramu  | pune    |    1 | dipu   | cs                |
+|  5 | Dipu  | kolkata |    1 | dipu   | cs                |
+|  6 | anu   | Goa     |    1 | dipu   | cs                |
+|  1 | Ram   | Haur    |    2 | bbb    | java              |
+|  2 | Shyam | Kolkata |    2 | bbb    | java              |
+|  3 | jadu  | pune    |    2 | bbb    | java              |
+|  4 | Ramu  | pune    |    2 | bbb    | java              |
+|  5 | Dipu  | kolkata |    2 | bbb    | java              |
+|  6 | anu   | Goa     |    2 | bbb    | java              |
+|  1 | Ram   | Haur    |    3 | bbb    | java              |
+|  2 | Shyam | Kolkata |    3 | bbb    | java              |
+|  3 | jadu  | pune    |    3 | bbb    | java              |
+|  4 | Ramu  | pune    |    3 | bbb    | java              |
+|  5 | Dipu  | kolkata |    3 | bbb    | java              |
+|  6 | anu   | Goa     |    3 | bbb    | java              |
+|  1 | Ram   | Haur    |    4 | ccc    | .net              |
+|  2 | Shyam | Kolkata |    4 | ccc    | .net              |
+|  3 | jadu  | pune    |    4 | ccc    | .net              |
+|  4 | Ramu  | pune    |    4 | ccc    | .net              |
+|  5 | Dipu  | kolkata |    4 | ccc    | .net              |
+|  6 | anu   | Goa     |    4 | ccc    | .net              |
+|  1 | Ram   | Haur    |    5 | ddd    | .c++              |
+|  2 | Shyam | Kolkata |    5 | ddd    | .c++              |
+|  3 | jadu  | pune    |    5 | ddd    | .c++              |
+|  4 | Ramu  | pune    |    5 | ddd    | .c++              |
+|  5 | Dipu  | kolkata |    5 | ddd    | .c++              |
+|  6 | anu   | Goa     |    5 | ddd    | .c++              |
+|  1 | Ram   | Haur    |    6 | mina   | digital marketing |
+|  2 | Shyam | Kolkata |    6 | mina   | digital marketing |
+|  3 | jadu  | pune    |    6 | mina   | digital marketing |
+|  4 | Ramu  | pune    |    6 | mina   | digital marketing |
+|  5 | Dipu  | kolkata |    6 | mina   | digital marketing |
+|  6 | anu   | Goa     |    6 | mina   | digital marketing |
+|  1 | Ram   | Haur    |    7 | ccc    | .net              |
+|  2 | Shyam | Kolkata |    7 | ccc    | .net              |
+|  3 | jadu  | pune    |    7 | ccc    | .net              |
+|  4 | Ramu  | pune    |    7 | ccc    | .net              |
+|  5 | Dipu  | kolkata |    7 | ccc    | .net              |
+|  6 | anu   | Goa     |    7 | ccc    | .net              |
++----+-------+---------+------+--------+-------------------+
+42 rows in set (0.05 sec)
+
+mysql> select address count(*) from officers group by address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'count
+(*) from officers group by address' at line 1
+mysql> select address, count(*) from officers group by address;
++---------+----------+
+| address | count(*) |
++---------+----------+
+| Haur    |        1 |
+| Kolkata |        2 |
+| pune    |        2 |
+| Goa     |        1 |
++---------+----------+
+4 rows in set (0.09 sec)
+
+mysql> alter table officers add column working_hours int(10);
+Query OK, 0 rows affected, 1 warning (1.62 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc officers;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id            | int         | NO   | PRI | NULL    |       |
+| name          | varchar(20) | NO   |     | NULL    |       |
+| address       | varchar(20) | NO   |     | NULL    |       |
+| working_hours | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+mysql> update officers set working_hours=2;
+Query OK, 6 rows affected (0.11 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             2 |
+|  3 | jadu  | pune    |             2 |
+|  4 | Ramu  | pune    |             2 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             2 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> update officers set working_hours=4 where id=2;
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set working_hours=9 where id=3;
+Query OK, 1 row affected (0.16 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set working_hours=6 where id=4;
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             4 |
+|  3 | jadu  | pune    |             9 |
+|  4 | Ramu  | pune    |             6 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             2 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> update officers set working_hours=6 where id=6;
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             4 |
+|  3 | jadu  | pune    |             9 |
+|  4 | Ramu  | pune    |             6 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             6 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.06 sec)
+
+mysql> select name,min(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.07 sec)
+
+mysql> select name,max(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into officers values(6,anu,Goa);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select name,avg(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |              2.0000 |
+| Shyam |              4.0000 |
+| jadu  |              9.0000 |
+| Ramu  |              6.0000 |
+| Dipu  |              2.0000 |
+| anu   |              6.0000 |
++-------+---------------------+
+6 rows in set (0.09 sec)
+
+mysql> insert into officers values(7,anu,Goa);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name having sum)working_hours>8;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near ')work
+ing_hours>8' at line 1
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name having sum(working_hours)>8;
++------+---------------------+
+| name | total_working_hours |
++------+---------------------+
+| jadu |                   9 |
++------+---------------------+
+1 row in set (0.00 sec)
+
+mysql>Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.22 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use regis;
+Database changed
+mysql> select*from officers;
++----+-------+---------+
+| id | name  | address |
++----+-------+---------+
+|  1 | Ram   | Haur    |
+|  2 | Shyam | Kolkata |
+|  3 | jadu  | pune    |
+|  4 | Ramu  | pune    |
+|  5 | Dipu  | kolkata |
+|  6 | anu   | Goa     |
++----+-------+---------+
+6 rows in set (0.07 sec)
+
+mysql> select*from studentss;
+ERROR 1146 (42S02): Table 'regis.studentss' doesn't exist
+mysql> select*from students;
++------+--------+-------------------+
+| s_id | s_name | s_course          |
++------+--------+-------------------+
+|    1 | dipu   | cs                |
+|    2 | bbb    | java              |
+|    3 | bbb    | java              |
+|    4 | ccc    | .net              |
+|    5 | ddd    | .c++              |
+|    6 | mina   | digital marketing |
+|    7 | ccc    | .net              |
++------+--------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name from officers  INNE
+R JOIN students ON officers.id=students.s_id;
++-------+---------+--------+
+| name  | address | s_name |
++-------+---------+--------+
+| Ram   | Haur    | dipu   |
+| Shyam | Kolkata | bbb    |
+| jadu  | pune    | bbb    |
+| Ramu  | pune    | ccc    |
+| Dipu  | kolkata | ddd    |
+| anu   | Goa     | mina   |
++-------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name from officers LEFT
+JOIN students ON officers.id=students.s_id;
++-------+---------+--------+
+| name  | address | s_name |
++-------+---------+--------+
+| Ram   | Haur    | dipu   |
+| Shyam | Kolkata | bbb    |
+| jadu  | pune    | bbb    |
+| Ramu  | pune    | ccc    |
+| Dipu  | kolkata | ddd    |
+| anu   | Goa     | mina   |
++-------+---------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select officers.name,officers.address,students.s_name,students.s_course f
+rom officers RIGHT JOIN students ON officers.id=students.s_id;
++-------+---------+--------+-------------------+
+| name  | address | s_name | s_course          |
++-------+---------+--------+-------------------+
+| Ram   | Haur    | dipu   | cs                |
+| Shyam | Kolkata | bbb    | java              |
+| jadu  | pune    | bbb    | java              |
+| Ramu  | pune    | ccc    | .net              |
+| Dipu  | kolkata | ddd    | .c++              |
+| anu   | Goa     | mina   | digital marketing |
+| NULL  | NULL    | ccc    | .net              |
++-------+---------+--------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> select officers.id, officers.name,officers.address,students.s_id,students
+.s_name,students.s_course from officers CROSS JOIN students;
++----+-------+---------+------+--------+-------------------+
+| id | name  | address | s_id | s_name | s_course          |
++----+-------+---------+------+--------+-------------------+
+|  1 | Ram   | Haur    |    1 | dipu   | cs                |
+|  2 | Shyam | Kolkata |    1 | dipu   | cs                |
+|  3 | jadu  | pune    |    1 | dipu   | cs                |
+|  4 | Ramu  | pune    |    1 | dipu   | cs                |
+|  5 | Dipu  | kolkata |    1 | dipu   | cs                |
+|  6 | anu   | Goa     |    1 | dipu   | cs                |
+|  1 | Ram   | Haur    |    2 | bbb    | java              |
+|  2 | Shyam | Kolkata |    2 | bbb    | java              |
+|  3 | jadu  | pune    |    2 | bbb    | java              |
+|  4 | Ramu  | pune    |    2 | bbb    | java              |
+|  5 | Dipu  | kolkata |    2 | bbb    | java              |
+|  6 | anu   | Goa     |    2 | bbb    | java              |
+|  1 | Ram   | Haur    |    3 | bbb    | java              |
+|  2 | Shyam | Kolkata |    3 | bbb    | java              |
+|  3 | jadu  | pune    |    3 | bbb    | java              |
+|  4 | Ramu  | pune    |    3 | bbb    | java              |
+|  5 | Dipu  | kolkata |    3 | bbb    | java              |
+|  6 | anu   | Goa     |    3 | bbb    | java              |
+|  1 | Ram   | Haur    |    4 | ccc    | .net              |
+|  2 | Shyam | Kolkata |    4 | ccc    | .net              |
+|  3 | jadu  | pune    |    4 | ccc    | .net              |
+|  4 | Ramu  | pune    |    4 | ccc    | .net              |
+|  5 | Dipu  | kolkata |    4 | ccc    | .net              |
+|  6 | anu   | Goa     |    4 | ccc    | .net              |
+|  1 | Ram   | Haur    |    5 | ddd    | .c++              |
+|  2 | Shyam | Kolkata |    5 | ddd    | .c++              |
+|  3 | jadu  | pune    |    5 | ddd    | .c++              |
+|  4 | Ramu  | pune    |    5 | ddd    | .c++              |
+|  5 | Dipu  | kolkata |    5 | ddd    | .c++              |
+|  6 | anu   | Goa     |    5 | ddd    | .c++              |
+|  1 | Ram   | Haur    |    6 | mina   | digital marketing |
+|  2 | Shyam | Kolkata |    6 | mina   | digital marketing |
+|  3 | jadu  | pune    |    6 | mina   | digital marketing |
+|  4 | Ramu  | pune    |    6 | mina   | digital marketing |
+|  5 | Dipu  | kolkata |    6 | mina   | digital marketing |
+|  6 | anu   | Goa     |    6 | mina   | digital marketing |
+|  1 | Ram   | Haur    |    7 | ccc    | .net              |
+|  2 | Shyam | Kolkata |    7 | ccc    | .net              |
+|  3 | jadu  | pune    |    7 | ccc    | .net              |
+|  4 | Ramu  | pune    |    7 | ccc    | .net              |
+|  5 | Dipu  | kolkata |    7 | ccc    | .net              |
+|  6 | anu   | Goa     |    7 | ccc    | .net              |
++----+-------+---------+------+--------+-------------------+
+42 rows in set (0.05 sec)
+
+mysql> select address count(*) from officers group by address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'count
+(*) from officers group by address' at line 1
+mysql> select address, count(*) from officers group by address;
++---------+----------+
+| address | count(*) |
++---------+----------+
+| Haur    |        1 |
+| Kolkata |        2 |
+| pune    |        2 |
+| Goa     |        1 |
++---------+----------+
+4 rows in set (0.09 sec)
+
+mysql> alter table officers add column working_hours int(10);
+Query OK, 0 rows affected, 1 warning (1.62 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc officers;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| id            | int         | NO   | PRI | NULL    |       |
+| name          | varchar(20) | NO   |     | NULL    |       |
+| address       | varchar(20) | NO   |     | NULL    |       |
+| working_hours | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.08 sec)
+
+mysql> update officers set working_hours=2;
+Query OK, 6 rows affected (0.11 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             2 |
+|  3 | jadu  | pune    |             2 |
+|  4 | Ramu  | pune    |             2 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             2 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> update officers set working_hours=4 where id=2;
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set working_hours=9 where id=3;
+Query OK, 1 row affected (0.16 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update officers set working_hours=6 where id=4;
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             4 |
+|  3 | jadu  | pune    |             9 |
+|  4 | Ramu  | pune    |             6 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             2 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> update officers set working_hours=6 where id=6;
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from officers;
++----+-------+---------+---------------+
+| id | name  | address | working_hours |
++----+-------+---------+---------------+
+|  1 | Ram   | Haur    |             2 |
+|  2 | Shyam | Kolkata |             4 |
+|  3 | jadu  | pune    |             9 |
+|  4 | Ramu  | pune    |             6 |
+|  5 | Dipu  | kolkata |             2 |
+|  6 | anu   | Goa     |             6 |
++----+-------+---------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.06 sec)
+
+mysql> select name,min(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.07 sec)
+
+mysql> select name,max(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |                   2 |
+| Shyam |                   4 |
+| jadu  |                   9 |
+| Ramu  |                   6 |
+| Dipu  |                   2 |
+| anu   |                   6 |
++-------+---------------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into officers values(6,anu,Goa);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select name,avg(working_hours)as "total_working_hours"  from officers gro
+up by name;
++-------+---------------------+
+| name  | total_working_hours |
++-------+---------------------+
+| Ram   |              2.0000 |
+| Shyam |              4.0000 |
+| jadu  |              9.0000 |
+| Ramu  |              6.0000 |
+| Dipu  |              2.0000 |
+| anu   |              6.0000 |
++-------+---------------------+
+6 rows in set (0.09 sec)
+
+mysql> insert into officers values(7,anu,Goa);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name having sum)working_hours>8;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near ')work
+ing_hours>8' at line 1
+mysql> select name,sum(working_hours)as "total_working_hours"  from officers gro
+up by name having sum(working_hours)>8;
++------+---------------------+
+| name | total_working_hours |
++------+---------------------+
+| jadu |                   9 |
++------+---------------------+
+1 row in set (0.00 sec)
+
+mysql>
