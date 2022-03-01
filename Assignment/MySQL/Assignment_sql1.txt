@@ -1,0 +1,358 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 22
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use regis
+Database changed
+mysql> select*from employee
+    -> exit
+    -> exit;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'exit
+exit' at line 2
+mysql> select*from employee;
++-------------+------------+-----------+--------+---------------------+---------
+---+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTME
+NT |
++-------------+------------+-----------+--------+---------------------+---------
+---+
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR
+   |
+|           2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin
+   |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR
+   |
+|           4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin
+   |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin
+   |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account
+   |
+|           7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account
+   |
+|           8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin
+   |
++-------------+------------+-----------+--------+---------------------+---------
+---+
+8 rows in set (0.00 sec)
+
+mysql> select*from bonuse;
+ERROR 1146 (42S02): Table 'regis.bonuse' doesn't exist
+mysql> select*from bonus;
++-----------------+---------------------+--------------+
+| EMPLOYEE_REF_ID | BONUS_DATE          | BONUS_AMOUNT |
++-----------------+---------------------+--------------+
+|               1 | 2016-02-20 00:00:00 |         5000 |
+|               1 | 2016-02-20 00:00:00 |         5000 |
+|               2 | 2016-06-11 00:00:00 |         3000 |
+|               3 | 2016-02-20 00:00:00 |         4000 |
+|               1 | 2016-02-20 00:00:00 |         4500 |
+|               2 | 2016-06-11 00:00:00 |         3500 |
++-----------------+---------------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> select*from title;
++-----------------+----------------+---------------------+
+| EMPLOYEE_REF_ID | EMPLOYEE_TITLE | AFFECTED_FROM       |
++-----------------+----------------+---------------------+
+|               1 | Manager        | 2016-02-20 00:00:00 |
+|               2 | Executive      | 2016-06-11 00:00:00 |
+|               8 | Executive      | 2016-06-11 00:00:00 |
+|               5 | Manager        | 2016-06-11 00:00:00 |
+|               4 | Asst. Manager  | 2016-06-11 00:00:00 |
+|               7 | Executive      | 2016-06-11 00:00:00 |
+|               6 | Lead           | 2016-06-11 00:00:00 |
+|               3 | Lead           | 2016-06-11 00:00:00 |
++-----------------+----------------+---------------------+
+8 rows in set (0.00 sec)
+
+Q-1. Write an SQL query to fetch “FIRST_NAME” from
+Employee table using the alias name as
+<EMPLOYEE_NAME>.
+Ans: 
+mysql> select FIRST_NAME AS "EMPLOYEE NAME" from employee;
++---------------+
+| EMPLOYEE NAME |
++---------------+
+| Monika        |
+| Niharika      |
+| Vishal        |
+| Amitabh       |
+| Vivek         |
+| Vipul         |
+| Satish        |
+| Geetika       |
++---------------+
+8 rows in set (0.00 sec)
+Q-2. Write an SQL query to fetch “FIRST_NAME” from
+EMPLOYEE table in upper case. 
+Ans: 
+mysql> select upper(FIRST_NAME) from employee;
++-------------------+
+| upper(FIRST_NAME) |
++-------------------+
+| MONIKA            |
+| NIHARIKA          |
+| VISHAL            |
+| AMITABH           |
+| VIVEK             |
+| VIPUL             |
+| SATISH            |
+| GEETIKA           |
++-------------------+
+8 rows in set (0.07 sec)
+
+Q-3. Write an SQL query to fetch unique values of DEPARTMENT from EMPLOYEE table.
+Ans:
+
+mysql> select distinct department from employee;
++------------+
+| department |
++------------+
+| HR         |
+| Admin      |
+| Account    |
++------------+
+3 rows in set (0.00 sec)
+Q-4. Write an SQL query to print the first three characters of FIRST_NAME from EMPLOYEE table.
+Ans:
+
+mysql> select SUBSTRING(FIRST_NAME,1,3) from employee;
++---------------------------+
+| SUBSTRING(FIRST_NAME,1,3) |
++---------------------------+
+| Mon                       |
+| Nih                       |
+| Vis                       |
+| Ami                       |
+| Viv                       |
+| Vip                       |
+| Sat                       |
+| Gee                       |
++---------------------------+
+8 rows in set (0.00 sec)
+Q-5. Write an SQL query to find the position of the
+alphabet (‘a’) in the first name column ‘Amitabh’ from
+EMPLOYEE table.
+ Ans:
+
+mysql>  Select INSTR(FIRST_NAME, BINARY'a') from employee where FIRST_NAME = 'Am
+itabh';
++------------------------------+
+| INSTR(FIRST_NAME, BINARY'a') |
++------------------------------+
+|                            1 |
++------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql>  Select INSTR(FIRST_NAME, BINARY'm') from employee where FIRST_NAME = 'Am
+itabh';
++------------------------------+
+| INSTR(FIRST_NAME, BINARY'm') |
++------------------------------+
+|                            2 |
++------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql>  Select INSTR(FIRST_NAME, BINARY'h') from employee where FIRST_NAME = 'Am
+itabh';
++------------------------------+
+| INSTR(FIRST_NAME, BINARY'h') |
++------------------------------+
+|                            7 |
++------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+Q-6. Write an SQL query to print the FIRST_NAME from EMPLOYEE table after removing white spaces from the 
+right side.
+ Ans:
+
+mysql> Select RTRIM(FIRST_NAME) from employee;
++-------------------+
+| RTRIM(FIRST_NAME) |
++-------------------+
+| Monika            |
+| Niharika          |
+| Vishal            |
+| Amitabh           |
+| Vivek             |
+| Vipul             |
+| Satish            |
+| Geetika           |
++-------------------+
+8 rows in set (0.00 sec)
+
+mysql> Select TRIM(FIRST_NAME) from employee;
++------------------+
+| TRIM(FIRST_NAME) |
++------------------+
+| Monika           |
+| Niharika         |
+| Vishal           |
+| Amitabh          |
+| Vivek            |
+| Vipul            |
+| Satish           |
+| Geetika          |
++------------------+
+8 rows in set (0.00 sec)
+Q-7. Write an SQL query to print the DEPARTMENT from EMPLOYEE table after removing white spaces from the left side.
+Ans:
+
+mysql> Select LTRIM(DEPARTMENT) from employee;
++-------------------+
+| LTRIM(DEPARTMENT) |
++-------------------+
+| HR                |
+| Admin             |
+| HR                |
+| Admin             |
+| Admin             |
+| Account           |
+| Account           |
+| Admin             |
++-------------------+
+8 rows in set (0.00 sec)
+Q-8. Write an SQL query that fetches the unique values of DEPARTMENT from EMPLOYEE table and prints its length.
+Ans:
+mysql>  select  distinct( length(department)) from employee;
++-----------------------+
+| ( length(department)) |
++-----------------------+
+|                     2 |
+|                     5 |
+|                     7 |
++-----------------------+
+3 rows in set (0.00 sec)
+Q-9. Write an SQL query to print the FIRST_NAME from EMPLOYEE table after replacing ‘a’ with ‘A’.
+Ans:
+
+mysql>  select replace(FIRST_NAME,'a','A') from employee;
++-----------------------------+
+| replace(FIRST_NAME,'a','A') |
++-----------------------------+
+| MonikA                      |
+| NihArikA                    |
+| VishAl                      |
+| AmitAbh                     |
+| Vivek                       |
+| Vipul                       |
+| SAtish                      |
+| GeetikA                     |
++-----------------------------+
+8 rows in set (0.00 sec)
+Q-10. Write an SQL query to print the FIRST_NAME and LAST_NAME from EMPLOYEE table into a single column COMPLETE_NAME. A space char should separate them. 
+Ans:
+
+
+mysql>  Select CONCAT(FIRST_NAME, ' ', LAST_NAME) AS 'COMPLETE_NAME' from employ
+ee;
++-----------------+
+| COMPLETE_NAME   |
++-----------------+
+| Monika Arora    |
+| Niharika Verma  |
+| Vishal Singhal  |
+| Amitabh Singh   |
+| Vivek Bhati     |
+| Vipul Diwan     |
+| Satish Kumar    |
+| Geetika Chauhan |
++-----------------+
+8 rows in set (0.00 sec)
+
+mysql>  Select CONCAT(FIRST_NAME, '   ', LAST_NAME) AS 'COMPLETE_NAME' from empl
+oyee;
++-------------------+
+| COMPLETE_NAME     |
++-------------------+
+| Monika   Arora    |
+| Niharika   Verma  |
+| Vishal   Singhal  |
+| Amitabh   Singh   |
+| Vivek   Bhati     |
+| Vipul   Diwan     |
+| Satish   Kumar    |
+| Geetika   Chauhan |
++-------------------+
+8 rows in set (0.00 sec)
+
+Q-11. Write an SQL query to print all EMPLOYEE details from the EMPLOYEE table order by FIRST_NAME Ascending.
+Ans:
+mysql> select* from employee order by FIRST_NAME ;
++-------------+------------+-----------+--------+---------------------+---------
+---+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTME
+NT |
++-------------+------------+-----------+--------+---------------------+---------
+---+
+|           4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin
+   |
+|           8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin
+   |
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR
+   |
+|           2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin
+   |
+|           7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account
+   |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account
+   |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR
+   |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin
+   |
++-------------+------------+-----------+--------+---------------------+---------
+---+
+8 rows in set (0.19 sec)
+
+Q-12. Write an SQL query to print all EMPLOYEE details from the EMPLOYEE table order by FIRST_NAME Ascending and DEPARTMENT Descending.
+Ans.
+mysql> select* from employee order by FIRST_NAME asc,DEPARTMENT desc;
++-------------+------------+-----------+--------+---------------------+---------
+---+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | SALARY | JOINING_DATE        | DEPARTME
+NT |
++-------------+------------+-----------+--------+---------------------+---------
+---+
+|           4 | Amitabh    | Singh     | 500000 | 2014-02-20 09:00:00 | Admin
+   |
+|           8 | Geetika    | Chauhan   |  90000 | 2014-04-11 09:00:00 | Admin
+   |
+|           1 | Monika     | Arora     | 100000 | 2014-02-20 09:00:00 | HR
+   |
+|           2 | Niharika   | Verma     |  80000 | 2014-06-11 09:00:00 | Admin
+   |
+|           7 | Satish     | Kumar     |  75000 | 2014-01-20 09:00:00 | Account
+   |
+|           6 | Vipul      | Diwan     | 200000 | 2014-06-11 09:00:00 | Account
+   |
+|           3 | Vishal     | Singhal   | 300000 | 2014-02-20 09:00:00 | HR
+   |
+|           5 | Vivek      | Bhati     | 500000 | 2014-06-11 09:00:00 | Admin
+   |
++-------------+------------+-----------+--------+---------------------+---------
+---+
+8 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+    
+
+
